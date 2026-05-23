@@ -20,6 +20,20 @@ class HistorialMedico extends Model
         'temperatura',
         'sistemas_evaluados',
         'examenes_realizados',
+        // Anamnesis
+        'anamnesis_motivo_consulta',
+        'anamnesis_dieta',
+        'anamnesis_vomito',
+        'anamnesis_diarrea',
+        'anamnesis_garrapatas',
+        'anamnesis_esquema_vacunal',
+        'anamnesis_desparasitacion',
+        'anamnesis_enfermedades_previas',
+        'anamnesis_tx_recientes',
+        'anamnesis_esterilizado',
+        'anamnesis_num_partos',
+        'anamnesis_vive_con_animales',
+        'anamnesis_cuales_animales',
     ];
 
     protected $casts = [

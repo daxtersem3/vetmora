@@ -15,6 +15,8 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -96,6 +98,68 @@ class HistorialMedicoResource extends Resource
 
             TextInput::make('peso')->label('Peso (kg)')->numeric()->step(0.01),
             TextInput::make('temperatura')->label('Temperatura (°C)')->numeric()->step(0.01),
+
+            // --- ANAMNESIS ---
+            Fieldset::make('ANAMNESIS')
+                ->schema([
+                    Textarea::make('anamnesis_motivo_consulta')
+                        ->label('Motivo de la Consulta')
+                        ->rows(2)
+                        ->columnSpanFull(),
+
+                    TextInput::make('anamnesis_dieta')
+                        ->label('Dieta')
+                        ->columnSpanFull(),
+
+                    Select::make('anamnesis_vomito')
+                        ->label('Vómito')
+                        ->options(['Sí' => 'Sí', 'No' => 'No'])
+                        ->native(false),
+
+                    Select::make('anamnesis_diarrea')
+                        ->label('Diarrea')
+                        ->options(['Sí' => 'Sí', 'No' => 'No'])
+                        ->native(false),
+
+                    Select::make('anamnesis_garrapatas')
+                        ->label('Garrapatas')
+                        ->options(['Sí' => 'Sí', 'No' => 'No'])
+                        ->native(false),
+
+                    TextInput::make('anamnesis_esquema_vacunal')
+                        ->label('Esquema Vacunal'),
+
+                    TextInput::make('anamnesis_desparasitacion')
+                        ->label('Desparasitación y Producto'),
+
+                    TextInput::make('anamnesis_enfermedades_previas')
+                        ->label('Enfermedades Previas'),
+
+                    TextInput::make('anamnesis_tx_recientes')
+                        ->label('Tx Recientes'),
+
+                    Select::make('anamnesis_esterilizado')
+                        ->label('Esterilizado o Castrado')
+                        ->options(['Sí' => 'Sí', 'No' => 'No'])
+                        ->native(false),
+
+                    TextInput::make('anamnesis_num_partos')
+                        ->label('N° Partos')
+                        ->numeric()
+                        ->minValue(0),
+
+                    Select::make('anamnesis_vive_con_animales')
+                        ->label('Vive con otros animales')
+                        ->options(['Sí' => 'Sí', 'No' => 'No'])
+                        ->native(false)
+                        ->live(),
+
+                    TextInput::make('anamnesis_cuales_animales')
+                        ->label('Cuáles')
+                        ->visible(fn (Get $get) => $get('anamnesis_vive_con_animales') === 'Sí'),
+                ])
+                ->columns(3)
+                ->columnSpanFull(),
 
             CheckboxList::make('sistemas_evaluados')
                 ->label('Sistemas Evaluados')
